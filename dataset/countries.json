@@ -5,6 +5,11 @@
 			"referenceName": "HttpServerGitHub1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"source": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
