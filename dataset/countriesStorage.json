@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "1665448d-6a57-46bd-8511-e2e3210936d4",
 				"container": "timcontainer"
 			},
 			"columnDelimiter": ",",
