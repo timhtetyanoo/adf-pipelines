@@ -23,6 +23,18 @@
 			"transformations": [
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "cast1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -33,10 +45,38 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          Region as string,",
+				"          Country as string,",
+				"          {Item Type} as string,",
+				"          {Sales Channel} as string,",
+				"          {Order Priority} as string,",
+				"          {Order Date} as date,",
+				"          {Order ID} as integer,",
+				"          {Ship Date} as date,",
+				"          {Units Sold} as short,",
+				"          {Unit Price} as double,",
+				"          {Unit Cost} as double,",
+				"          {Total Revenue} as double,",
+				"          {Total Cost} as double,",
+				"          {Total Profit} as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source2",
-				"source1 filter(notEquals(id, \"AF\")) ~> filter1"
+				"source1 filter(notEquals(id, \"AF\")) ~> filter1",
+				"filter1, source2 join(value == Country,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 cast(output(",
+				"          {Unit Price} as integer",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"cast1 derive(isMoreThan100K = greater({Total Profit}, 100000)) ~> derivedColumn1",
+				"derivedColumn1 aggregate(groupBy(count = count()),",
+				"     counts = ERROR_FUNCTION('')) ~> aggregate1"
 			]
 		}
 	}
