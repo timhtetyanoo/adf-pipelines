@@ -10,6 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "100%20Sales%20Records.csv",
+				"folderPath": "denandreychuk/b9aa812f10e4b60368cff69c6384a210/raw/d24f715d9350d674b0b1bf494d82ccdf81de0647",
 				"container": "timcontainer"
 			},
 			"columnDelimiter": ",",

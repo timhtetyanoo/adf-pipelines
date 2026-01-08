@@ -5,6 +5,8 @@
 			{
 				"name": "If Condition1",
 				"type": "IfCondition",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
@@ -141,6 +143,29 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.for_array",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					]
+				}
 			}
 		],
 		"parameters": {
@@ -155,6 +180,14 @@
 			"iscountry": {
 				"type": "bool",
 				"defaultValue": true
+			},
+			"for_array": {
+				"type": "array",
+				"defaultValue": [
+					1,
+					2,
+					3
+				]
 			}
 		},
 		"annotations": []
